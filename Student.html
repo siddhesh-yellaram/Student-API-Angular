@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="angular.js"></script>
+    <style>
+        input.ng-valid {
+            background-color: lightgreen;
+        }
+
+        input.ng-invalid {
+            background-color: lightpink;
+        }
+
+        .form-container {
+            padding: 20px;
+        }
+    </style>
+    <title>Student API</title>
+</head>
+
+<body ng-app="studApp" ng-controller="studentCtrl">
+    <div>
+        <form class="form-container" name="studentForm" novalidate>
+            <h2>Student Registration</h2>
+            <p>Name: <br>
+                <input name="name" type="text" ng-model="student.name" style="margin-top: 10px;" required>
+                <span style="color:red" ng-show="studentForm.name.$error.required ">Name is required.</span>
+            </p>
+
+            <p>Email: <br>
+                <input name="email" type="email" ng-model="student.email" length="100" style="margin-top: 10px;"
+                    required>
+                <span style="color:red">
+                    <span ng-show="studentForm.email.$error.required">Email is required.</span>
+                    <span ng-show="studentForm.email.$error.email">Invalid email address.</span>
+                </span>
+            </p>
+
+            <p>Age: <br>
+                <input name="age" id="age" type="range" min="0" max="50" value="1" ng-model="student.age"
+                    style="margin-top: 10px;" required>
+                <span>{{student.age}}</span>
+                <span style="color:red" ng-show="studentForm.age.$error.required">Age is required.</span>
+            </p>
+
+            <p>Roll No: <br>
+                <input name="rollNo" type="text" id="rollNo" ng-model="student.rollNo" style="margin-top: 10px;"
+                    required>
+                <span style="color:red" ng-show="studentForm.rollNo.$error.required">Roll No is
+                    required.</span>
+            </p>
+
+            <p>Gender: <br>
+                <input type="radio" name="isMale" value="true" ng-model="student.isMale" style="margin-top: 10px;">
+                <label for="male">Male</label><br>
+                <input type="radio" name="isMale" value="false" ng-model="student.isMale">
+                <label for="female">Female</label>
+                <span style="color:red" ng-show="studentForm.isMale.$error.required">Selecting Radio Btn is
+                    required.</span>
+            </p>
+
+            <p>Date: <br>
+                <input name="date" type="date" id="date" ng-model="student.date" style="margin-top: 10px;">
+                <span style="color:red" ng-show="studentForm.date.$error.required">Date is required.</span>
+            </p>
+
+            <p>
+                <button ng-click="resetForm()" class="btn btn-outline-success" style="margin-top: 10px;">Reset</button>
+                <button ng-disabled="studentForm.firstname.$pristine &&  
+                          studentForm.firstname.$invalid || studentForm.rollNo.$pristine &&  
+                          studentForm.rollNo.$invalid || studentForm.age.$pristine &&  
+                          studentForm.age.$invalid" ng-click="submitForm()" class="btn btn-outline-success"
+                    style="margin-top: 10px;">Submit</button>
+            </p>
+
+            <p>Current Id:
+                <input name="currentId" type="text" ng-model="currentStudentId">
+                <button ng-disabled="studentForm.firstname.$pristine &&  
+                   studentForm.firstname.$invalid || studentForm.rollNo.$pristine &&  
+                   studentForm.rollNo.$invalid || studentForm.age.$pristine &&  
+                   studentForm.age.$invalid" ng-click="updateStud()" class="btn btn-outline-success"
+                    style="margin: 10px;">Update Student</button><br>
+                <button ng-click="dispCurrStud()" class="btn btn-outline-success" style="margin: 10px;">Display Current
+                    Student</button>
+                <button ng-click="dispAllStud()" class="btn btn-outline-success">Display All Students</button>
+            </p>
+
+            <!-- <div class="container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th>Roll No</th>
+                            <th>isMale</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="s in student">
+                            <td>{{ s.name }}</td>
+                            <td>{{ s.email }}</td>
+                            <td>{{ s.age }}</td>
+                            <td>{{ s.rollNo }}</td>
+                            <td>{{ s.isMale }}</td>
+                            <td>{{ s.date }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> -->
+        </form>
+    </div>
+    <script src="StudentAPI.js"></script>
+</body>
+
+</html>
